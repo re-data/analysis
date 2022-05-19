@@ -1,0 +1,7 @@
+version: 2
+
+sources:
+  - name: re_data_python_library
+    tables:
+      - name: command_call
+      - name: command_exception
