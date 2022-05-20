@@ -43,5 +43,5 @@ jobs:
         with:
           dbt_cloud_token: ${{ secrets.DBT_CLOUD_API_TOKEN }}
           dbt_cloud_account_id: 63872 # Copied from the dbt Cloud UI
-          dbt_cloud_job_id: 54732 # Copied from the dbt Cloud UI
+          dbt_cloud_job_id: 88597 # Copied from the dbt Cloud UI
 
