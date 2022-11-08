@@ -1,28 +1,19 @@
-# This is a basic workflow to help you get started with Actions
+name: analysis
 
-name: compute_re_data
-
-# Controls when the workflow will run
 on:
 
   schedule:
-  - cron: "0 0 0 2 *"
+    - cron: "0 0 0 2 *"
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
       - uses: actions/setup-python@v1
         with:
           python-version: "3.7.x"
@@ -30,18 +21,13 @@ jobs:
       - name: Install re_data and python dependencies
         working-directory: .
         run: |
-          pip install dbt-snowflake==1.0.0
+          pip install dbt-snowflake
+          pip install re_data
+          pip install re_cloud
           
-      - name: Setup dbt
+      - name: Run dbt
         working-directory: .
         run: |
           dbt --version
           dbt deps
-          
-      - uses: fal-ai/dbt-cloud-action@main
-        id: dbt_cloud_run
-        with:
-          dbt_cloud_token: ${{ secrets.DBT_CLOUD_API_TOKEN }}
-          dbt_cloud_account_id: 63872 # Copied from the dbt Cloud UI
-          dbt_cloud_job_id: 88597 # Copied from the dbt Cloud UI
-
+          dbt run --select package:analysis
