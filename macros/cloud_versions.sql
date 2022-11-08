@@ -1,3 +1,6 @@
-{% macro cloud_versions() %}
-    ['0.1.0', '0.0.1']
-{% endmacro }
+{% macro library_version() %}
+    case
+        when command in ('dbt_docs', 're_data') then 're_cloud'
+        else 're_data'
+    end as library
+{% endmacro %}
