@@ -13,6 +13,9 @@ env:
   DBT_PROFILES_DIR: ${{ github.workspace }}
   RE_DATA_CONFIG_DIR: ${{ github.workspace }}
   RE_DATA_SEND_ANONYMOUS_USAGE_STATS: 0
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+  SNOWFLAKE_DBT_PASSWORD: ${{ secrets.SNOWFLAKE_DBT_PASSWORD }}
+  
 
 jobs:
 
