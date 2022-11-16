@@ -41,8 +41,6 @@ jobs:
       - name: Run dbt
         working-directory: .
         run: |
-          echo $DBT_PROFILES_DIR
-          echo $SNOWFLAKE_ACCOUNT
           dbt --version
           dbt deps
           dbt run --select package:analysis
