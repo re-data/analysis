@@ -33,6 +33,7 @@ jobs:
       - name: Run dbt
         working-directory: .
         run: |
+          echo $DBT_PROFILES_DIR
           dbt --version
           dbt deps
           dbt run --select package:analysis
