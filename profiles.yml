@@ -3,9 +3,9 @@ default:
   outputs:
     dev:
       type: snowflake
-      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      account: "{{ secrets.SNOWFLAKE_ACCOUNT }}"
       user: dbt_mateusz
-      password: "{{ env_var('SNOWFLAKE_DBT_PASSWORD') }}"
+      password: "{{ secrets.SNOWFLAKE_DBT_PASSWORD }}"
 
       database: SEGMENT_EVENTS
       warehouse: SEGMENT_WH
