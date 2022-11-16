@@ -15,7 +15,7 @@ env:
   RE_DATA_SEND_ANONYMOUS_USAGE_STATS: 0
   SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
   SNOWFLAKE_DBT_PASSWORD: ${{ secrets.SNOWFLAKE_DBT_PASSWORD }}
-  
+
 
 jobs:
 
@@ -39,6 +39,7 @@ jobs:
         working-directory: .
         run: |
           echo $DBT_PROFILES_DIR
+          echo $SNOWFLAKE_ACCOUNT
           dbt --version
           dbt deps
           dbt run --select package:analysis
