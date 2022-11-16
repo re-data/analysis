@@ -7,6 +7,11 @@ on:
 
   workflow_dispatch:
 
+env:
+  DBT_PROFILES_DIR: ${{ github.workspace }}
+  RE_DATA_CONFIG_DIR: ${{ github.workspace }}
+  RE_DATA_SEND_ANONYMOUS_USAGE_STATS: 0
+
 jobs:
 
   build:
