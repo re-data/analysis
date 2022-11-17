@@ -1,2 +1,0 @@
-re_cloud:
-  api_key: "{{ env_var('RE_CLOUD_API_KEY') }}"
