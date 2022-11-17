@@ -49,6 +49,7 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: |
+            touch ${{ github.workspace }}/re_data.yml 
             yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_API_KEY}}"' ${{ github.workspace }}/re_data.yml 
       
       - name: Run re_data
