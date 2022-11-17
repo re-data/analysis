@@ -47,8 +47,8 @@ jobs:
 
       - name: Configure re_data.yml
         uses: mikefarah/yq@master
-        working-directory: .
         with:
+          working-directory: .
           cmd: |
             yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_API_KEY}}"' re_data.yml 
       
