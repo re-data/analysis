@@ -46,8 +46,8 @@ jobs:
           dbt run-operation export_exceptions
 
       - name: Configure re_data.yml
-        working-directory: .
         uses: mikefarah/yq@master
+        working-directory: .
         with:
           cmd: |
             yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_API_KEY}}"' re_data.yml 
