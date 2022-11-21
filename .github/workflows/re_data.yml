@@ -43,7 +43,6 @@ jobs:
           dbt --version
           dbt deps
           dbt run --select package:analysis
-          dbt run-operation export_exceptions
 
       - name: Configure re_data.yml
         uses: mikefarah/yq@master
@@ -55,5 +54,4 @@ jobs:
       - name: Run re_data
         working-directory: views
         run: |
-          python exceptions.py
-          re_cloud upload custom --file index.html --name exceptions
+          python re_data_analytics.py
