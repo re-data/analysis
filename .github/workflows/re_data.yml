@@ -36,7 +36,7 @@ jobs:
           pip install re_cloud
           pip install plotly
           pip install pandas
-          pip install altair BeautifulSoup pandas 
+          pip install altair beautifulsoup4 pandas 
           
       - name: Run dbt
         working-directory: .
