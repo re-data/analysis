@@ -5,6 +5,7 @@ import io
 from bs4 import BeautifulSoup
 import random
 import string
+from pathlib import Path
 
 def random_str(chars = string.ascii_uppercase + string.digits, N=10):
 	return ''.join(random.choice(chars) for _ in range(N))
@@ -14,9 +15,10 @@ class dbt(object):
     @staticmethod
     def write_macro(sql):
         """Write a dbt macro to the macros folder"""
-        
-        path = os.path.join("../macros", "temp_macros", "temp.sql")
-        with open(path, "w") as f:
+
+        temp_macro_path = '../macros/temp_macros'
+        Path(temp_macro_path).mkdir(parents=True, exist_ok=True)
+        with open(os.path.join(temp_macro_path, "temp.sql"), "w") as f:
             f.write(r"""
             {% macro temp_macro_export() %}
                 {% set query %}
