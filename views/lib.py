@@ -123,15 +123,29 @@ class Plot(Element):
         script = str(body.find('script'))
         script = script.replace('"#vis"', f'"#{random_id}"')
         script = script.replace("getElementById(\'vis\')", f"getElementById(\'{random_id}\')")
-        return str_div + script
-        
+        return f"<div class='re_plot'>{str_div}{script}</div>"
+
+
+class Metric(Element):
+    def __init__(self, label, value):
+        self.label = label
+        self.value = value
+
+    def render(self):
+        return f"""
+        <div class='re_metric'>
+            <div class='re_metric_value'>{self.label}</div>
+            <div class='re_metric_label'>{self.value}</div>
+        </div>
+        """
+    
 
 class Text(Element):
     def __init__(self, text):
         self.text = text
 
     def render(self):
-        return f"<div>{self.text}</div>"
+        return f"<div class='re_text'>{self.text}</div>"
 
 
 class Report(object):
