@@ -36,6 +36,10 @@ class dbt(object):
         df = pd.read_json("../temp_macros_result.json")
         return df
 
+    @staticmethod
+    def docs():
+        os.system("dbt docs generate")
+
 
 class Element(object):
     def head(self):
@@ -75,11 +79,11 @@ class Table(Element):
         return f"<div class='re_table'>{html}</div>"
 
 class Plot(Element):
-    def __init__(self, df, x=None, y=None, color=None, kind="line", title=None, **kwargs):
+    def __init__(self, df, x=None, y=None, dimension=None, kind="line", title=None, **kwargs):
         self.df = df
         self.x = x
         self.y = y
-        self.color = color
+        self.dimension = dimension
         self.kind = kind
         self.title = title
         self.kwargs = kwargs
@@ -87,15 +91,15 @@ class Plot(Element):
 
 
     def chart_html(self):
-        re_data_color = "#8884D8"
+        base_color = "#4C78A8"
 
         chart = alt.Chart(self.df).mark_line(
             interpolate='cardinal',
-            point=alt.OverlayMarkDef(color=re_data_color),
-            color=re_data_color
+            point=alt.OverlayMarkDef(color=base_color),
+            color=base_color
         )
         
-        if not self.color:
+        if not self.dimension:
             chart = chart.encode(
                 x=self.x,
                 y=self.y,
@@ -104,7 +108,7 @@ class Plot(Element):
             chart = chart.encode(
                 x=self.x,
                 y=self.y,
-                color=self.color
+                color=alt.Color(self.dimension, scale=alt.Scale(scheme='tableau20'))
             )
 
         chart = chart.properties(
@@ -162,6 +166,21 @@ class Text(Element):
         return f"<div class='re_text'>{self.text}</div>"
 
 
+class GenericReport(object):
+    def generate(self):
+        pass
+
+    def upload(self):
+        pass
+
+class DbtDocs(GenericReport):
+    def generate(self):
+        return super().generate()
+
+    def upload(self):
+        os.system(f're_cloud upload ')
+
+
 class Report(object):
     def __init__(self, name) -> None:
         self.name = name
@@ -193,7 +212,7 @@ class Report(object):
 
         return "<html><head>{}</head><body>{}</body></html>".format(head, body)
 
-    def save_html(self, file_name="index.html"):
+    def generate(self, file_name="index.html"):
         with open(file_name, "w") as f:
             f.write(self.render())
 
@@ -201,4 +220,3 @@ class Report(object):
         with open("index.html", "w") as f:
             f.write(self.render())
             os.system(f"re_cloud upload custom --file index.html --name {self.name}")
-
