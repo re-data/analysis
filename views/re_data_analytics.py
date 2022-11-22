@@ -1,4 +1,4 @@
-from lib import dbt, Report, Header, Metric
+from lib import dbt, Report, Header, Metric, Attachment
 import pandas as pd
 
 #df = dbt.query("select * from {{ ref('exceptions_by_day') }} where date >= '2022-11-01'")
@@ -17,6 +17,8 @@ my_report.plot(df, x="DATE", y="DISTINCT_USERS", title="My plot")
 my_report.table(df, limit=10)
 
 my_report.plot(df2, x="DATE", y="DISTINCT_USERS", dimension="LIBRARY", title="My plot 2")
+
+my_report.add(Attachment("df1.csv"))
 
 # upload, host and share with others with 1 line of code
 my_report.add(Metric("My metric", 100))

@@ -144,6 +144,19 @@ class Plot(Element):
         return f"<div class='re_plot'>{str_div}{script}</div>"
 
 
+class Attachment(Element):
+    def __init__(self, file_path, description=None):
+        self.file_path = file_path
+        self.description = description or file_path
+
+
+    def render(self):
+        return f"""
+        <div class='re_attachment'>
+            <a href="{self.file_path}">Download {self.description}</a>
+        </div>
+        """
+
 class Metric(Element):
     def __init__(self, label, value):
         self.label = label
