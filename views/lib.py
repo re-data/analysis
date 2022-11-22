@@ -7,7 +7,7 @@ import random
 import string
 from pathlib import Path
 
-def random_str(chars = string.ascii_uppercase + string.digits, N=10):
+def random_str(chars = string.ascii_uppercase + string.digits, N=12):
 	return ''.join(random.choice(chars) for _ in range(N))
 
 class dbt(object):
@@ -87,7 +87,13 @@ class Plot(Element):
 
 
     def chart_html(self):
-        chart = alt.Chart(self.df).mark_line()
+        re_data_color = "#8884D8"
+
+        chart = alt.Chart(self.df).mark_line(
+            interpolate='cardinal',
+            point=alt.OverlayMarkDef(color=re_data_color),
+            color=re_data_color
+        )
         
         if not self.color:
             chart = chart.encode(
@@ -98,8 +104,14 @@ class Plot(Element):
             chart = chart.encode(
                 x=self.x,
                 y=self.y,
-                column=self.color
+                color=self.color
             )
+
+        chart = chart.properties(
+            width='container',
+            title=self.title,
+            height=500
+        )
 
         chart_file = io.StringIO("")
         chart.save(chart_file, format="html")
@@ -117,7 +129,9 @@ class Plot(Element):
 
         random_id = "chart" + random_str(N=15)
 
-        str_div = str(body.find('div'))
+        str_div = f"""
+        <div id="{random_id}" style="min-width: 100%; heigth: 200px"></div>
+        """
         str_div = str_div.replace('vis', random_id)
 
         script = str(body.find('script'))
