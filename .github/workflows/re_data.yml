@@ -34,10 +34,7 @@ jobs:
           pip install dbt-snowflake
           pip install re_data
           pip install re_cloud
-          pip install plotly
-          pip install pandas
-          pip install altair beautifulsoup4 pandas pathlib
-          
+
       - name: Run dbt
         working-directory: .
         run: |
