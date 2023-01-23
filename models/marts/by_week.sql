@@ -1,3 +1,9 @@
+{{
+    config(
+        re_data_monitored=true,
+    )
+}}
+
 select
     week(timestamp) as week,
     library,

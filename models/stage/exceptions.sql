@@ -1,3 +1,10 @@
+{{
+    config(
+        re_data_monitored=true,
+        re_data_time_filter='timestamp'
+    )
+}}
+
 select 
     {{ dbt_utils.surrogate_key(['os_system', 'dbt_version', 're_data_version', 'python_version']) }} as system_id,
     {{ library_version() }},
