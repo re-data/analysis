@@ -52,7 +52,8 @@ jobs:
           cmd: |
             yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_API_KEY}}"' re_data.yml 
       
-      - name: Run re_data
-        working-directory: views
+      - name: Upload dbt docs
+        working-directory: .
         run: |
-          python re_data_analytics.py
+          dbt docs generate
+          re_cloud upload dbt-docs --name analytics-docs 
