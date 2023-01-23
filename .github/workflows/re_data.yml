@@ -29,14 +29,12 @@ jobs:
           python-version: "3.7.x"
 
       - name: Install re_data and python dependencies
-        working-directory: .
         run: |
           pip install dbt-snowflake
           pip install re_data
           pip install re_cloud
 
       - name: Run dbt
-        working-directory: .
         run: |
           dbt --version
           dbt deps
@@ -45,18 +43,16 @@ jobs:
       - name: Configure re_data.yml
         uses: mikefarah/yq@master
         with:
-          working-directory: .
           cmd: |
             yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_API_KEY}}"' re_data.yml 
       
       - name: Compute and upload dbt docs
-        working-directory: .
         run: |
           dbt docs generate
           re_cloud upload dbt-docs --name analytics-docs 
 
       - name: Compute and upload re_data report
-        working-directory: .
         run: |
           re_data run
+          re_data overview generate
           re_cloud upload re-data --name analytics-report
