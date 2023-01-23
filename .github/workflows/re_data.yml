@@ -59,5 +59,4 @@ jobs:
         working-directory: .
         run: |
           re_data run
-          re_cloud upload dbt-docs --name analytics-docs 
-          re_cloud upload re_data --name analytics-report
+          re_cloud upload re-data --name analytics-report
