@@ -39,20 +39,32 @@ jobs:
           dbt --version
           dbt deps
           dbt run --select package:analysis
+          dbt docs generate
 
-      - name: Configure re_data.yml
+      - name: Run re_data
+        run: |
+          re_data run
+          re_data overview generate
+
+      - name: Configure re_data.yml for re_cloud production
         uses: mikefarah/yq@master
         with:
           cmd: |
             yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_API_KEY}}"' re_data.yml 
       
-      - name: Compute and upload dbt docs
+      - name: Upload dbt docs and re_data to production cloud
         run: |
-          dbt docs generate
           re_cloud upload dbt-docs --name analytics-docs 
+          re_cloud upload re-data --name analytics-report
 
-      - name: Compute and upload re_data report
+      - name: Configure re_data.yml for re_cloud testing
+        uses: mikefarah/yq@master
+        with:
+          cmd: |
+            yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_TEST_API_KEY}}"' re_data.yml 
+            - name: Compute and upload dbt docs
+      
+      - name: Upload dbt docs to testing cloud
         run: |
-          re_data run
-          re_data overview generate
+          re_cloud upload dbt-docs --name analytics-docs 
           re_cloud upload re-data --name analytics-report
