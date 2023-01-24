@@ -62,7 +62,6 @@ jobs:
         with:
           cmd: |
             yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_TEST_API_KEY}}"' re_data.yml 
-            - name: Compute and upload dbt docs
       
       - name: Upload dbt docs to testing cloud
         run: |
