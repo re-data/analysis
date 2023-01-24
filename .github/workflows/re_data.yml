@@ -62,6 +62,7 @@ jobs:
         with:
           cmd: |
             yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_TEST_API_KEY}}"' re_data.yml 
+            yq -i '.re_cloud.base_url = "https://test.getre.io"' re_data.yml
       
       - name: Upload dbt docs to testing cloud
         run: |
