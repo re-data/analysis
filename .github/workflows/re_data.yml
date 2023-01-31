@@ -38,12 +38,14 @@ jobs:
         run: |
           dbt --version
           dbt deps
+          re_data run
           dbt run --select package:analysis
+
+      - name: Generate dbt docs
           dbt docs generate
 
-      - name: Run re_data
+      - name: Generate re_data overview
         run: |
-          re_data run
           re_data overview generate
 
       - name: Configure re_data.yml for re_cloud production
