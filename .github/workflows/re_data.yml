@@ -42,6 +42,7 @@ jobs:
           dbt run --select package:analysis
 
       - name: Generate dbt docs
+        run: |
           dbt docs generate
 
       - name: Generate re_data overview
