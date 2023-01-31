@@ -38,8 +38,8 @@ jobs:
         run: |
           dbt --version
           dbt deps
+          dbt run
           re_data run
-          dbt run --select package:analysis
 
       - name: Generate dbt docs
         run: |
