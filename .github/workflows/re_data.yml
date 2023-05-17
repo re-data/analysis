@@ -79,3 +79,4 @@ jobs:
         run: |
           re_cloud upload dbt-docs --name analytics-docs 
           re_cloud upload re-data --name analytics-report
+          re_cloud upload html-file --name github-actions-summary --file github_actions_url.html
