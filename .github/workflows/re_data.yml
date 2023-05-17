@@ -72,3 +72,7 @@ jobs:
         run: |
           re_cloud upload dbt-docs --name analytics-docs 
           re_cloud upload re-data --name analytics-report
+
+      - name: Print Github Actions URL
+        run: echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        shell: bash
