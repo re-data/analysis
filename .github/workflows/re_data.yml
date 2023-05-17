@@ -66,6 +66,8 @@ jobs:
           re_cloud upload dbt-docs --name analytics-docs 
           re_cloud upload re-data --name analytics-report
           re_cloud upload html-file --name github-actions-summary --file index.html
+          re_cloud upload html-file --name dbt-logs --file logs_file.html
+          re_cloud upload html-file --name dbt-logs --file logs_file.html
         shell: bash
 
       - name: Configure re_data.yml for re_cloud testing
