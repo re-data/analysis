@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snowflake Query Logs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #24292e;
+            background-color: #f6f8fa;
+            padding: 10px;
+        }
+        .log {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            background-color: #ffffff;
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .log-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .log-content {
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .log-summary {
+            margin-top: 8px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="log">
+        <div class="log-title">Query #1</div>
+        <div class="log-content">
+            SELECT * FROM users WHERE last_login > '2023-01-01';
+        </div>
+        <div class="log-summary">
+            Execution Time: 0.5s | Cost: 10 Snowflake credits
+        </div>
+    </div>
+    <div class="log">
+        <div class="log-title">Query #2</div>
+        <div class="log-content">
+            UPDATE users SET active = false WHERE last_login < '2023-01-01';
+        </div>
+        <div class="log-summary">
+            Execution Time: 1.2s | Cost: 12 Snowflake credits
+        </div>
+    </div>
+    <div class="log">
+        <div class="log-title">Query #3</div>
+        <div class="log-content">
+            SELECT * FROM users WHERE last_login > '2023-01-01';
+        </div>
+        <div class="log-summary">
+            Execution Time: 0.5s | Cost: 10 Snowflake credits
+        </div>
+    </div>
+    <div class="log">
+        <div class="log-title">Query #4</div>
+        <div class="log-content">
+            UPDATE users SET active = false WHERE last_login < '2023-01-01';
+        </div>
+        <div class="log-summary">
+            Execution Time: 1.2s | Cost: 12 Snowflake credits
+        </div>
+    </div>
+    <div class="log">
+        <div class="log-title">Query #3</div>
+        <div class="log-content">
+            SELECT * FROM users WHERE last_login > '2023-01-01';
+        </div>
+        <div class="log-summary">
+            Execution Time: 0.5s | Cost: 10 Snowflake credits
+        </div>
+    </div>
+    <div class="log">
+        <div class="log-title">Query #4</div>
+        <div class="log-content">
+            UPDATE users SET active = false WHERE last_login < '2023-01-01';
+        </div>
+        <div class="log-summary">
+            Execution Time: 1.2s | Cost: 12 Snowflake credits
+        </div>
+    </div>
+    <div class="log">
+        <div class="log-title">Query #5</div>
+        <div class="log-content">
+            UPDATE users SET active = false WHERE last_login < '2023-01-01';
+        </div>
+        <div class="log-summary">
+            Execution Time: 1.2s | Cost: 12 Snowflake credits
+        </div>
+    </div>
+    <!-- Add more log blocks as needed -->
+</body>
+</html>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Pipeline Logs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #24292e;
+            background-color: #f6f8fa;
+            padding: 10px;
+        }
+        .log {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            background-color: #ffffff;
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .log-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .log-content {
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="log">
+        <div class="log-title">Pipeline Run #1</div>
+        <div class="log-content">
+            INFO: Start of data pipeline
+            INFO: Loading data from source
+            ERROR: Failed to connect to data source
+            INFO: Retry connecting to data source
+            INFO: Successfully connected to data source
+            INFO: Data pipeline completed successfully
+        </div>
+    </div>
+    <div class="log">
+        <div class="log-title">Pipeline Run #2</div>
+        <div class="log-content">
+            INFO: Start of data pipeline
+            INFO: Loading data from source
+            INFO: Successfully connected to data source
+            INFO: Data pipeline completed successfully
+        </div>
+    </div>
+    <!-- Add more log blocks as needed -->
+</body>
+</html>
