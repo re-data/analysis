@@ -74,5 +74,9 @@ jobs:
           re_cloud upload re-data --name analytics-report
 
       - name: Print Github Actions URL
-        run: echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          touch github_actions_url.html
+          echo "<a href='{{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Github action run</a>" > github_actions_url.html
+          re_cloud upload html-file --name github-actions-summary --file github_actions_url.html
+
         shell: bash
