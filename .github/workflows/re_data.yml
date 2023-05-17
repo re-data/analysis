@@ -59,7 +59,7 @@ jobs:
       - name: Upload github actions summary
         run: |
           touch github_actions_url.html
-          echo "<a href='{{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Github action run</a>" > github_actions_url.html
+          echo "<a href='https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Github action run</a>" > github_actions_url.html
       
       - name: Upload dbt docs and re_data to production cloud
         run: |
