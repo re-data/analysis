@@ -36,7 +36,7 @@
     <div class="log">
         <div class="log-title">Query #1</div>
         <div class="log-content">
-            SELECT * FROM users WHERE last_login > '2023-01-01';
+            select * from dbt.by_day where library = 're_cloud' order by date desc limit 1000;
         </div>
         <div class="log-summary">
             Execution Time: 0.5s | Cost: 10 Snowflake credits
@@ -45,7 +45,7 @@
     <div class="log">
         <div class="log-title">Query #2</div>
         <div class="log-content">
-            UPDATE users SET active = false WHERE last_login < '2023-01-01';
+            select * from dbt.by_day where library = 're_cloud' order by date desc limit 100;
         </div>
         <div class="log-summary">
             Execution Time: 1.2s | Cost: 12 Snowflake credits
@@ -54,7 +54,62 @@
     <div class="log">
         <div class="log-title">Query #3</div>
         <div class="log-content">
-            SELECT * FROM users WHERE last_login > '2023-01-01';
+with tables as (
+
+select
+    table_catalog as "table_database",
+    table_schema as "table_schema",
+    table_name as "table_name",
+    table_type as "table_type",
+    comment as "table_comment",
+
+    -- note: this is the _role_ that owns the table
+    table_owner as "table_owner",
+
+    'Clustering Key' as "stats:clustering_key:label",
+    clustering_key as "stats:clustering_key:value",
+    'The key used to cluster this table' as "stats:clustering_key:description",
+    (clustering_key is not null) as "stats:clustering_key:include",
+
+    'Row Count' as "stats:row_count:label",
+    row_count as "stats:row_count:value",
+    'An approximate count of rows in this table' as "stats:row_count:description",
+    (row_count is not null) as "stats:row_count:include",
+
+    'Approximate Size' as "stats:bytes:label",
+    bytes as "stats:bytes:value",
+    'Approximate size of the table as reported by Snowflake' as "stats:bytes:description",
+    (bytes is not null) as "stats:bytes:include",
+
+    'Last Modified' as "stats:last_modified:label",
+    to_varchar(convert_timezone('UTC', last_altered), 'yyyy-mm-dd HH24:MI'||'UTC') as "stats:last_modified:value",
+    'The timestamp for last update/change' as "stats:last_modified:description",
+    (last_altered is not null and table_type='BASE TABLE') as "stats:last_modified:include"
+
+from SEGMENT_EVENTS.INFORMATION_SCHEMA.tables
+
+),
+
+columns as (
+
+select
+    table_catalog as "table_database",
+    table_schema as "table_schema",
+    table_name as "table_name",
+
+    column_name as "column_name",
+    ordinal_position as "column_index",
+    data_type as "column_type",
+    comment as "column_comment"
+
+from SEGMENT_EVENTS.INFORMATION_SCHEMA.columns
+)
+
+select *
+from tables
+join columns using ("table_database", "table_schema", "table_name")
+where (upper("table_schema") = upper('dbt') or upper("table_schema") = upper('dbt_re_internal') or upper("table_schema") = upper('dbt_re') or upper("table_schema") = upper('re_data_python_library'))
+order by "column_index"
         </div>
         <div class="log-summary">
             Execution Time: 0.5s | Cost: 10 Snowflake credits
@@ -90,7 +145,7 @@
     <div class="log">
         <div class="log-title">Query #5</div>
         <div class="log-content">
-            UPDATE users SET active = false WHERE last_login < '2023-01-01';
+            select * from SEGMENT_EVENTS.DBT_re_internal.re_data_run_started_at
         </div>
         <div class="log-summary">
             Execution Time: 1.2s | Cost: 12 Snowflake credits
