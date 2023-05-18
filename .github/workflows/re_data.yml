@@ -56,16 +56,11 @@ jobs:
           cmd: |
             yq -i '.re_cloud.api_key = "${{secrets.RE_CLOUD_API_KEY}}"' re_data.yml 
 
-      - name: Upload github actions summary
-        run: |
-          touch github_actions_url.html
-          echo "<a href='https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Github action run</a>" > github_actions_url.html
-      
       - name: Upload dbt docs and re_data to production cloud
         run: |
           re_cloud upload dbt-docs --name analytics-docs 
           re_cloud upload re-data --name analytics-report
-          re_cloud upload html-file --name github-actions-summary --file index.html
+          re_cloud upload html-file --name github-actions-summary --file github_actions_url.html
           re_cloud upload html-file --name dbt-logs --file logs_file.html
           re_cloud upload html-file --name snowflake-queries --file snowflake_logs.html
           re_cloud upload html-file --name snowflake-costs --file snowflake_costs.html

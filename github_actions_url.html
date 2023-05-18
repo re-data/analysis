@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Pipeline Run Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #24292e;
+            background-color: #f6f8fa;
+            padding: 20px;
+        }
+        .summary {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 20px;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .summary-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .summary-subtitle {
+            color: #586069;
+            margin-bottom: 10px;
+        }
+        .summary-content {
+            white-space: pre-wrap;
+            font-family: monospace;
+            color: #24292e;
+        }
+    </style>
+</head>
+<body>
+    <div class="summary">
+        <div class="summary-title">Data Pipeline Run #123456</div>
+        <div class="summary-subtitle">This workflow has a workflow_dispatch event trigger.</div>
+        <div class="summary-content">
+            The workflow is not valid. .github/workflows/main.yml (Line: 2, Col: 1): Unexpected value 'on'
+        </div>
+    </div>
+</body>
+</html>
