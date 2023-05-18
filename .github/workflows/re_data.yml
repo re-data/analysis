@@ -63,7 +63,7 @@ jobs:
           re_cloud upload html-file --name github-actions-summary --file github_actions_url.html
           re_cloud upload html-file --name dbt-logs --file logs_file.html
           re_cloud upload html-file --name snowflake-queries --file snowflake_logs.html
-          re_cloud upload html-file --name snowflake-costs --file snowflake_costs.html
+          re_cloud upload html-file --name snowflake-costs --file snowflake_cost.html
           re_cloud up
         shell: bash
 
@@ -81,4 +81,4 @@ jobs:
           re_cloud upload html-file --name github-actions-summary --file github_actions_url.html
           re_cloud upload html-file --name dbt-logs --file logs_file.html
           re_cloud upload html-file --name snowflake-queries --file snowflake_logs.html
-          re_cloud upload html-file --name snowflake-costs --file snowflake_costs.html
+          re_cloud upload html-file --name snowflake-costs --file snowflake_cost.html
